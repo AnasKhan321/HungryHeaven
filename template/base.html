@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>Title</title>
+      <link rel="stylesheet" href="{%static   'css/style.css' %}">
+
+</head>
+<body>
+
+  <header>
+
+ <nav class="navbar" {% block nav %} {% endblock %}>
+      <div class="logo">HungryHaven</div>
+      <ul class="d-flex">
+          <li class="l-item">  <a href="/">Home</a> </li>
+          {% if user.is_authenticated %}
+          <li class="l-item">  <a href="/order">My Orders</a> </li>
+          <li class="l-item">  <a href="/cart">My Cart </a> </li>
+          {% endif %}
+
+
+
+      </ul>
+
+      <ul class="d-flex">
+
+             {% if user.is_authenticated %}
+          <li class="l-item-auth">  <a href="logout">Logout</a> </li>
+           <li class="l-item-auth">    {{ request.user }}</li>
+                    {% if exists %}
+                    <li class="l-item-auth">  <a href="/hotel/{{id}}">Your  Restraunt </a> </li>
+                    {% else %}
+                    <li class="l-item-auth">  <a href="restraunt">Add a Restaraunt </a> </li>
+                    {% endif %}
+
+            {% else %}
+          <li class="l-item-auth">  <a href="signup">Sign Up</a> </li>
+          <li class="l-item-auth">  <a href="login">Login </a> </li>
+            {% endif %}
+
+
+
+
+      </ul>
+
+
+
+    </nav>
+  </header>
+
+{% block body %} {% endblock %}
+  <script src="https://kit.fontawesome.com/34dccf2496.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

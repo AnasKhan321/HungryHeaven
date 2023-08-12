@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+        {% load static %}
+
+    <link rel="stylesheet" href="{%static   'css/signup.css' %}">
+    <div>
+    <img src="{%static 'img/profile.jpg' %}">
+</div>
+      <div class="signup">
+        <form method="POST" action="/profile">
+                    <h2>Complete Your Profile  </h2>
+                    {% csrf_token %}
+
+
+            <input type="tel" name="number" placeholder="Enter Phone Number  ">
+            <input type="text" name="address" placeholder="Enter your delivery  address">
+            <input type="text" name="state" placeholder="Enter your State">
+            <input type="text" name="city" placeholder="Enter your City">
+                <small  style="
+    color: white;
+    margin: 10px 0px;
+">It take Few minutes to Complete  </small>
+            <button>SignUp</button>
+        </form>
+    </div>
+<script>
+
+        document.title = "HungryHaven - Profile "
+
+</script>
+{% endblock %}

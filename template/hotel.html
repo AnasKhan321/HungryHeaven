@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block nav %} style="
+    background: white;
+    color : black ;
+" {% endblock %}
+
+{% block body %}
+        {% load static %}
+
+    <div class="contain">
+
+        <div class="inform">
+
+            <div>
+                <h3 id="name">{{Hotel.Name}}</h3>
+                <p>{{Hotel.Address}}</p>
+                <p>{{Hotel.Hotel_type}}</p>
+            </div>
+            <div>
+
+                <p>{{Hotel.Rating}} </p>
+                <p>{{Hotel.Ratings}} </p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="time">
+                <div> <i class="fa-solid fa-clock"></i>  {{Hotel.Duration}}min</div>
+                <div><i class="fa-solid fa-indian-rupee-sign"></i>{{Hotel.Money}}For One Person </div>
+
+        </div>
+        <hr>
+        {% if userr %}
+            <a href="/item" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #009cff;
+">Add item </a>
+
+        {% endif %}
+        {% for item in items %}
+        <div class="item">
+                <div class="price">
+
+                    <b id="N{{item.id}}">{{item.Name}}</b>
+                    <p><i class="fa-solid fa-indian-rupee-sign"></i> <b id="pr{{item.id}}">{{item.Price}}</b></p>
+                </div>
+
+                <div class="item-img">
+
+                    <img src="{{item.image.url}}">
+                    <div class="buttons">
+
+                        <p class="plus" id="p{{item.id}}" style="cursor:pointer; ">+</p>
+                        <input id="{{item.id}}q"  value=0 style="
+    width: 2vw;
+    text-align: center;
+">
+                        <p class="minus" id="m{{item.id}}"  style="cursor:pointer; ">-</p>
+                    </div>
+
+
+
+                </div>
+
+
+        </div>
+                                        <hr>
+        {% endfor %}
+
+
+    </div>
+
+
+<script>
+    document.title = `HungryHaven - ${document.getElementById('name').innerHTML} `
+
+    let ll = localStorage;
+
+    if (ll.length >  0 ){
+
+        if(ll.name === document.getElementById('name').innerHTML){
+                for (let index = 0; index < ll.length; index++) {
+                     let aa = localStorage.key(index)
+                     let k = localStorage.key(index)[0]
+                     if (k == 'N'){
+
+                            let ss = localStorage.key(index).slice(1)
+                            let v = localStorage.getItem(aa)
+                            document.getElementById(  ss + 'q' ).value = v
+                     }
+           }}else{
+                    localStorage.clear();
+           }
+    }
+
+
+
+    let a = document.querySelectorAll(".l-item");
+    for(let c of a ){ c.childNodes[1].style.color = 'black' };
+    let pp = document.getElementsByClassName('plus')
+    for(let c of pp){
+         c.addEventListener('click',(e)=>{
+                 let val = document.getElementById(e.target.id.slice(1) + 'q').value =  parseInt(document.getElementById(e.target.id.slice(1) + 'q').value)+1;
+                 let key =  document.getElementById( 'N' + e.target.id.slice(1) )
+                 let nn = document.getElementById('pr' +  e.target.id.slice(1)).innerHTML
+                 let key1 = key.innerHTML
+                 let key2 = key.id
+                 console.log(val)
+
+                 let obj = {}
+                  obj[`${key2}`] = val ;
+                  localStorage.setItem(key1,JSON.stringify({'value' : val, 'price' : nn }));
+                  localStorage.setItem( key2, val);
+                  let name = document.getElementById('name').innerHTML
+
+                  localStorage.setItem('name',name)
+                 console.log(obj)
+            })
+    }
+
+    let mm = document.getElementsByClassName('minus')
+     for(let c of mm){c.addEventListener('click',(e)=>{
+        if(document.getElementById(e.target.id.slice(1) + 'q').value >  0 ){
+                   let val = document.getElementById(e.target.id.slice(1) + 'q').value =  parseInt(document.getElementById(e.target.id.slice(1) + 'q').value)-1;
+                 let key =  document.getElementById( 'N' + e.target.id.slice(1) )
+                 let nn = document.getElementById('pr' +  e.target.id.slice(1)).innerHTML
+                 let key1 = key.innerHTML
+                 let key2 = key.id
+                 console.log(val)
+
+                 let obj = {}
+                  obj[`${key2}`] = val ;
+                  localStorage.setItem(key1,JSON.stringify({'value' : val, 'price' : nn }));
+                  localStorage.setItem( key2, val);
+                                   if(val == 0 ){ localStorage.clear();}
+
+                  } else{ localStorage.clear();  }
+             }
+         )
+      }
+</script>
+
+
+{% endblock %}

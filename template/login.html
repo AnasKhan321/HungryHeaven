@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+            {% load static %}
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{%static   'css/login.css' %}">
+    <title>Title</title>
+</head>
+<body style="background-image: url({% static 'img/login.jpg'});">
+
+<img src="{%static 'img/login.jpg' %}">
+
+    <div class="form">
+    <form class="form-input" method="POST" action="/login" >
+        {% csrf_token %}
+        <h3 class="head">Login to HungerHeaven</h3>
+        <input type="text" name="loginusername" placeholder="Enter Your Username here " required>
+        <input type="password" name="loginpass" placeholder="Enter Your Password here" required>
+        <button type="submit">Login</button>
+        <small  style="
+    color: white;
+    margin: 10px 0px;
+">Didn't Have Account? <a href="/signup" style="
+    text-decoration: none;
+    color: #8bbcff;
+">   SignUp</a> </small>
+    </form></div>
+<script src="https://kit.fontawesome.com/34dccf2496.js" crossorigin="anonymous"></script>
+<script>
+
+        document.title = "HungryHaven - Login"
+
+</script>
+</body>
+</html>

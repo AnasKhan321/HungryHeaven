@@ -1,0 +1,16 @@
+.Name{
+    text-align : center ;
+}
+
+.item{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 3vh;
+    border: 2px solid #6f63635c;
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-radius: 15px;
+
+}

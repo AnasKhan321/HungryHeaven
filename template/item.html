@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block nav %} style="
+    background: white;
+    color : black ;
+" {% endblock %}
+
+{% block body %}
+        {% load static %}
+    <link rel="stylesheet" href="{%static   'css/login.css' %}">
+    <img src="{%static 'img/item.jpg' %}">
+
+    <div  class="message" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+" >
+  <form class="form-input" method="POST" action="/item"  enctype="multipart/form-data" >
+        {% csrf_token %}
+        <h3 class="head">Add item To Restaurant {{hotel}}</h3>
+        <input type="text" name="Name" placeholder="Enter Your item Name " required>
+        <input type="text" name="price" placeholder="Enter Your item Price" required>
+      <label for="imgi" style="
+    color: white;
+">Enter Img of Item </label>
+        <input type="file" name="img_hotel" id="imgi" >
+      <button type="submit"  style="
+    align-self: center;
+    margin-right: 5vw;
+">Add</button>
+  </form>
+        </div>
+
+<script>
+    document.title = "HungryHaven - Add Item "
+
+    let a = document.querySelectorAll(".l-item");
+    for(let c of a ){ c.childNodes[1].style.color = 'black' };
+
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+        {% load static %}
+    <link rel="stylesheet" href="{%static   'css/signup.css' %}">
+        <img src="{%static 'img/res2.jpg' %}">
+
+
+    {% block nav %} style="
+    background: black;
+    color : white ;
+" {% endblock %}
+       <div class="signup" >
+        <form method="POST" action="/restraunt"  enctype="multipart/form-data" >
+                    <h2>Add your Restaurant </h2>
+                    {% csrf_token %}
+
+
+
+           <input type="text" name="name" placeholder="Enter Your Restraunt  Name"   required>
+          <input type="text" name="htype" placeholder="Enter Your Hotel Type "   required>
+          <input type="text" name="address" placeholder="Enter Your Address "   required>
+            <input type="text" name="duration" placeholder="Enter a Duration You can prepared Food  "   required>
+            <input type="tel" name="price" placeholder="Enter Your Average Price for one Person "   required>
+
+            <input type="text" name="city" placeholder="Enter Your City"   required>
+            <input type="text" name="state" placeholder="Enter Your State "   required>
+            <input type="tel" name="number" placeholder="Enter Your Mobile no.  "   required>
+            <label for="imgh"  style="
+    margin: 15px 0px;
+    color: white;
+">Enter the Image of Your Restraunt </label>
+            <input type="file" name="imgh" placeholder=""   id="imgh"   style="
+    width: 10vw;
+" required>
+            <small style="
+    color: white;
+">You Can Add Only One Restraunt With Your Email id </small>
+            <button>Add</button>
+        </form>
+    </div>
+<script>
+
+        document.title = "HungryHaven - Add Restraunt"
+
+</script>
+
+{% endblock %}

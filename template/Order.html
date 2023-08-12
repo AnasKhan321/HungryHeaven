@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block nav %} style="
+    background: white;
+    color : black ;
+" {% endblock %}
+
+{% block body %}
+
+        {% load static %}
+{% for order in orders reversed %}
+<div class="card" style="
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    border: 2px solid black;
+    width: 40rem;
+    margin: 20px auto;
+    padding: 15px 30px;
+    border: 2px solid #c9c9c9;
+    border-radius: 10px;
+">
+        <h3>{{order.Hotel_Name}}</h3>
+        <p>{{order.Item}}</p>
+        <p>{{order.date}}</p>
+        <b>Your Bill of Total {{order.Price}} ruppees  </b>
+        <h4>{{order.Update}}</h4>
+</div>
+{% endfor %}
+{% if empty %}
+    <p style="
+    text-align: center;
+    font-size: 20px;
+">Place Your First  <a href="/" style="
+    text-decoration: none;
+    color: #0089ff;
+">Order Now </a> </p>
+{% endif %}
+<script>
+    document.title = "HungryHaven - Orders"
+     let a = document.querySelectorAll(".l-item");
+    for(let c of a ){ c.childNodes[1].style.color = 'black' };
+</script>
+{% endblock %}

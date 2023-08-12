@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block nav %} style="
+    background: white;
+    color : black ;
+" {% endblock %}
+
+{% block body %}
+        {% load static %}
+    <link rel="stylesheet" href="{%static   'css/cart.css' %}">
+
+{% for message in messages %}
+    <p class="message" style="
+    text-align: center;
+    color: #24e924;
+">{{message}}</p>
+{% endfor %}
+<div id="body">
+<div class="Name">
+    <h2 id="name"></h2>
+
+</div>
+
+
+
+<div  style="
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+" id="bill"></div>
+
+<div style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+
+">
+<button style="
+    text-align: center;
+    color: white;
+    background: #ff8800;
+    padding: 7px 15px;
+    font-size: 15px;
+    border: 2px solid white;
+    border-radius: 5px;
+     cursor: pointer;
+" id="btn">Clear Cart </button>
+</div>
+</div>
+
+<div>
+
+    <form method="POST"  style="
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+" id="form" action="/cart">
+        {% csrf_token %}
+
+        <input type="hidden" id="iteml" name="item">
+        <input type="hidden" id="hname" name="hname">
+        <input type="hidden" id="pricei" name="price">
+        <button style="
+    text-align: center;
+    color: white;
+    background: #ff8800;
+    padding: 7px 15px;
+    font-size: 15px;
+    border: 2px solid white;
+    border-radius: 5px;
+     cursor: pointer;
+" id="order">Order Now </button>
+    </form>
+</div>
+<script>
+    document.title = "HungryHaven - Cart"
+
+      let d = document.querySelector('.message')
+    setTimeout(()=>{
+        d.style.display = "none";
+
+    },3000)
+     let a = document.querySelectorAll(".l-item");
+    for(let c of a ){ c.childNodes[1].style.color = 'black' };
+
+    document.getElementById('btn').addEventListener('click' , ()=>{
+
+        localStorage.clear();
+        document.getElementById("body").innerHTML = '';
+    })
+
+
+    document.getElementById('order').addEventListener('click' , ()=>{
+
+        localStorage.clear();
+        document.getElementById("body").innerHTML = '';
+        document.getElementById("form").submit()
+    })
+
+    let ll = localStorage
+    if(ll.length > 0 ){
+        let items = [];
+        let h = localStorage.name;
+        document.getElementById("name").innerHTML = h ;
+        let billr = 0 ;
+        for (let index = 0; index < ll.length; index++) {
+                let item1 = localStorage.key(index)
+                if(item1[0] !== 'N' && item1[0]!== 'n'){
+                    console.log(item1)
+                    let i = JSON.parse( localStorage.getItem(item1))
+                    console.log(i)
+                    let di = document.createElement('div')
+                    di.classList.add('item')
+                    items.push(`${item1} X ${i.value}`)
+
+                    di.innerHTML = ` <p>${item1} </p> <p> ${i.value}</p> <p> ${i.price}</p>`
+                    document.getElementById("body").appendChild(di)
+                    billr+=parseInt(i.price)*i.value
+                }
+
+        }
+        console.log(items)
+        document.getElementById('bill').innerHTML = `Your Total bill is Ruppees of ${billr}` ;
+        document.getElementById('iteml').value = items ;
+        document.getElementById('hname').value = h ;
+        document.getElementById('pricei').value = billr;
+    }
+
+    else{
+            document.getElementById('bill').innerHTML = `Your Card is Empty Add item To Your Cart`
+            document.getElementById('order').style.display = 'None'
+    }
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>HungryHaven</title>
+        {% load static %}
+
+
+  <meta name="description" content="Description Goes Here">
+    <link rel="stylesheet" href="{%static   'css/style.css' %}">
+
+</head>
+<body>
+
+  <header>
+
+    <nav class="navbar">
+      <div class="logo">HungryHaven</div>
+      <ul class="d-flex">
+          <li class="l-item">  <a href="/">Home</a> </li>
+          {% if ncomplete %}
+
+          {%else%}
+               <li class="l-item">  <a href="/order">My Orders</a> </li>
+              <li class="l-item">  <a href="/cart">My Cart </a> </li>
+          {% endif %}
+
+
+
+      </ul>
+
+      <ul class="d-flex">
+
+             {% if user.is_authenticated %}
+          <li class="l-item-auth">  <a href="logout">Logout</a> </li>
+           <li class="l-item-auth">    {{ request.user }}</li>
+                    {% if exists %}
+                    <li class="l-item-auth">  <a href="hotel/{{id}}">Your  Restraunt </a> </li>
+                    {% else %}
+                    <li class="l-item-auth">  <a href="/restraunt">Add a Restaraunt </a> </li>
+                    {% endif %}
+
+            {% else %}
+          <li class="l-item-auth">  <a href="signup">Sign Up</a> </li>
+          <li class="l-item-auth">  <a href="login">Login </a> </li>
+            {% endif %}
+
+
+
+
+      </ul>
+
+
+
+    </nav>
+  </header>
+  {% for message in messages %}
+  <p class="message"  style="
+    position: relative;
+    color: #99ff12;
+    text-align: center;
+    z-index: 2;
+">{{message}} </p>
+
+  {% endfor %}
+
+  <div class="poster">
+      <img src="{%static 'img/23.jpg' %}">
+
+  </div>
+
+  <div class="Welcome">
+    <h1 style="
+    margin: 15px 0px;
+" class="hh">Welcome to HungryHeaven</h1>
+    <p class="pp">
+      Introducing HungryHeaven, your ultimate destination for a seamless and delightful food delivery experience. At HungryHeaven, we understand that your cravings know no bounds, and that's why we've curated a diverse selection of culinary delights from the finest local restaurants. With our user-friendly platform and intuitive interface, ordering your favorite dishes has never been easier. Explore a world of flavors from the comfort of your home, and let us take care of the rest.
+    </p>
+  </div>
+
+  <div class="barier">
+
+   </div>
+
+  <div class="services">
+      <section class="services-container">
+    <h1 class="h-primary center ma">Our Services </h1>
+    <div id="services">
+      <div class="box">
+              <img src="{%static 'img/1.png' %}">
+
+        <h2 class="h-secondary center">Food Ordering </h2>
+        <p class="center"> < ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        co </p>
+      </div>
+
+      <div class="box">
+                      <img src="{%static 'img/2.png' %}">
+
+        <h2 class="h-secondary center">Food Catering  </h2>
+        <p class="center"> < ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co </p>
+      </div>
+
+
+      <div class="box">
+                      <img src="{%static 'img/3.png' %}">
+
+        <h2 class="h-secondary center"> Bulk Ordering </h2>
+        <p class="center"> < ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea co
+       </p>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="restaurant center">Order From Best Restraunts </h2>
+  <br>
+  <hr>
+  <section class="Hotels">
+    {% if ncomplete %}
+        <a href="/profile" style="
+    text-decoration: none;
+    padding: 20px 0px;
+">Complete Your Profile To See Restaraunt</a>
+    {% else %}
+        {% for hotel in Hotels %}
+
+        <div class="hotel">
+          <div class="img">
+
+                            <img src="{{hotel.image.url}}">
+
+          </div>
+          <div class="information ">
+              <h3 class="h-name"> {{hotel.Name}} </h3>
+              <p class="rating">3.5 <i class="fa-solid fa-star"></i></p>
+              <p class="h-type">{{hotel.Hotel_type}} </p>
+              <p class="h-address">{{hotel.Address}} <i class="fa-solid fa-location-dot"></i></p>
+              <a href="/hotel/{{hotel.id}}" style="
+    text-decoration: none;
+    color: #0080ff;
+">View Menu </a>
+          </div>
+
+      </div>
+      {% endfor %}
+    {% endif %}
+
+
+
+
+
+
+
+
+  </section>
+
+
+
+  </div>
+
+
+  <script src="https://kit.fontawesome.com/34dccf2496.js" crossorigin="anonymous"></script>
+
+    <script>
+
+            let d = document.querySelector('.message')
+    setTimeout(()=>{
+        d.style.display = "none";
+
+    },3000)
+    </script>
+</body>
+</html>

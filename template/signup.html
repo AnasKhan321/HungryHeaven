@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+            {% load static %}
+
+    <link rel="stylesheet" href="{%static   'css/signup.css' %}">
+
+    <title>HungerHeaven - SignUp </title>
+</head>
+<body>
+    <img src="{%static 'img/signup2.jpg' %}">
+
+
+    <div class="signup">
+        <form method="POST" action="/signup">
+                    <h2>Sign Up to HungryHeaven </h2>
+                    {% csrf_token %}
+
+            <div class="name">
+
+                       <input type="text" name="fname" placeholder="Enter Your First Name"   required>
+                            <input type="text" name="lname" placeholder="Enter Your Last Name"   required>
+
+            </div>
+                              <input type="text" name="username" placeholder="Enter Your Username"   required>
+
+            <input type="email" name="email" placeholder="Enter Your Email  "   required>
+            <input type="password" name="pass1" placeholder="Enter Your PassWord"   required>
+            <input type="password" name="pass2" placeholder="Confirm PassWord"   required>
+            <button>SignUp</button>
+        </form>
+    </div>
+<script src="https://kit.fontawesome.com/34dccf2496.js" crossorigin="anonymous"></script>
+<script>
+
+            document.title = "HungryHaven - Sign Up "
+</script>
+</body>
+</html>
